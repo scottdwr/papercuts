@@ -16,3 +16,10 @@ html {
   background-position: center;
   border: 1px solid #999;
 }
+
+#add-repo {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1;
+}

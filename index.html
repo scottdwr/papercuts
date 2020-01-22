@@ -14,20 +14,9 @@
       href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
     />
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <style>
-      #demo-absolute-fab {
-        position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-        z-index: 1;
-      }
-    </style>
   </head>
   <body class="mdc-typography">
-    <header
-      class="mdc-top-app-bar"
-      data-mdc-auto-init="MDCTopAppBar"
-    >
+    <header class="mdc-top-app-bar" data-mdc-auto-init="MDCTopAppBar">
       <div class="mdc-top-app-bar__row">
         <section
           class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
@@ -36,39 +25,32 @@
         </section>
       </div>
     </header>
-  <div class="mdc-top-app-bar--fixed-adjust">
-    <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list">
-  <li class="mdc-list-item" tabindex="0">
-    <span class="mdc-list-item__graphic" aria-hidden="true"></span>
-    <span class="mdc-list-item__text">
-      <span class="mdc-list-item__primary-text">Two-line item</span>
-      <span class="mdc-list-item__secondary-text">Secondary text</span>
-    </span>
-    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
-  </li>
-  <li class="mdc-list-item">
-    <span class="mdc-list-item__graphic" aria-hidden="true"></span>
-    <span class="mdc-list-item__text">
-      <span class="mdc-list-item__primary-text">Two-line item</span>
-      <span class="mdc-list-item__secondary-text">Secondary text</span>
-    </span>
-    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
-  </li>
-  <li class="mdc-list-item">
-    <span class="mdc-list-item__graphic" aria-hidden="true"></span>
-    <span class="mdc-list-item__text">
-      <span class="mdc-list-item__primary-text">Two-line item</span>
-      <span class="mdc-list-item__secondary-text">Secondary text</span>
-    </span>
-    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
-  </li>
-</ul>
-  </div>
+
+    <div class="mdc-top-app-bar--fixed-adjust">
+      <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list">
+        <li class="mdc-list-item" tabindex="0">
+          <span class="mdc-list-item__graphic" aria-hidden="true"></span>
+          <span class="mdc-list-item__text">
+            <span class="mdc-list-item__primary-text">Two-line item</span>
+            <span class="mdc-list-item__secondary-text">Secondary text</span>
+          </span>
+          <button
+            class="mdc-list-item__meta mdc-icon-button"
+            aria-label="Delete Repo"
+            aria-hidden="true"
+            aria-pressed="false"
+            data-mdc-auto-init="MDCRipple"
+          >
+            <i class="material-icons mdc-icon-button__icon">delete</i>
+          </button>
+        </li>
+      </ul>
+    </div>
 
     <button
       class="mdc-fab mdc-ripple-surface mdc-ripple-radius-bounded"
-      id="demo-absolute-fab"
-      aria-label="Favorite"
+      id="add-repo"
+      aria-label="Add Repo"
       data-mdc-auto-init="MDCRipple"
     >
       <span class="mdc-fab__icon material-icons">add</span>
