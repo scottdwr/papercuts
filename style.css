@@ -7,11 +7,7 @@ html {
 }
 .mdc-list-item__graphic {
   background: rgb(73, 255, 230);
-  background: linear-gradient(
-    144deg,
-    rgba(73, 255, 230, 1) 0%,
-    rgba(0, 130, 138, 1) 100%
-  );
+  background: #eee;
   background-size: cover;
   background-position: center;
   border: 1px solid #999;
