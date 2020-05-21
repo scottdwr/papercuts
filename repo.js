@@ -45,7 +45,7 @@ export function addSource(url){
   localStorage.setItem("sources",JSON.stringify(sources))
   load(url)
 }
-export function init() {
+export async function init() {
   sources=JSON.parse(localStorage.getItem("sources")||"[]");
   sources.forEach(load)
 }
