@@ -37,6 +37,7 @@ async function addSource() {
       handler: async (e) => {
         try {
           await client.addSource(e.url);
+          await refreshSources()
         } catch (e) {
           error("The URL you entered wasn't a valid source");
         }
@@ -59,7 +60,12 @@ function createSourceListItem(repo) {
   ia.appendChild(iai);
   ii.appendChild(ia);
   let il = document.createElement("ion-label");
-  il.textContent = repo.name;
+  let ilh = document.createElement("h2");
+  ilh.textContent = repo.name;
+  il.appendChild(ilh);
+  let ilp = document.createElement("p");
+  ilp.textContent = repo.url;
+  il.appendChild(ilp);
   ii.appendChild(il);
   iis.appendChild(ii);
   let iios = document.createElement("ion-item-options");
@@ -68,6 +74,9 @@ function createSourceListItem(repo) {
   let iio = document.createElement("ion-item-option");
   iio.color = "danger";
   iio.textContent = "Remove";
+  iio.addEventListener("click",()=>{
+    client.removeSource(repo.url)
+  })
   iios.appendChild(iio);
   return iis;
 }
@@ -78,10 +87,12 @@ document.querySelector("#addSource").addEventListener("click", () => {
 window.client=client;
 
 const sourceList=document.querySelector("#sourceList");
-(async () => {
+async function refreshSources(){
   await client.init();
   sourceList.innerHTML="";
   client.getDb().repos.forEach(e=>{
-    sourceListcreateSourceListItem(e)
+    sourceList.appendChild(createSourceListItem(e))
   })
-})();
+}
+
+refreshSources()
