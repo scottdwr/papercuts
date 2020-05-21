@@ -1,5 +1,8 @@
 let db = {};
 let sources = [];
+let arch = (navigator.userAgent.match(/iP\w+ OS ([\d_]+)/)||["",""])[1].split("_")[0];
+arch=arch?"ios"+arch:"";
+
 db.repos = [];
 db.packages = [];
 async function load(repo, dryrun) {
@@ -18,6 +21,7 @@ async function load(repo, dryrun) {
       for (let pakage of packages) {
         let dbpackage = {};
         dbpackage.id = pakage.id + "";
+        dbpackage.icon = pakage.icon + "" || "https://via.placeholder.com/57";
         dbpackage.version = pakage.version + "";
         dbpackage.name = pakage.name + "";
         dbpackage.link = pakage.link + "";
@@ -26,6 +30,7 @@ async function load(repo, dryrun) {
           name: "No Contact",
           link: "about:blank"
         };
+        dbpackage.compatible=(dbpackage.arch==arch||dbpackage.arch=="universal");
         dbpackage.maintainer = pakage.maintainer || dbpackage.author;
         dbpackage.description = pakage.description + "" || "";
         dbpackage.depends = pakage.depends || [];

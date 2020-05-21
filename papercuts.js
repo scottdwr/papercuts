@@ -91,6 +91,9 @@ function createPackageListItem(pkg) {
   let ilh = document.createElement("h2");
   ilh.textContent = pkg.name;
   il.appendChild(ilh);
+  let ilp = document.createElement("p");
+  ilp.textContent = `v${pkg.version} - ${pkg.author.name} - ${pkg.arch}`;
+  il.appendChild(ilp);
   ii.appendChild(il);
   return ii;
 }
@@ -101,8 +104,20 @@ document.querySelector("#addSource").addEventListener("click", () => {
 window.client = client;
 
 const sourceList = document.querySelector("#sourceList");
+const packageList = document.querySelector("#packageList");
 
-const wait=ms=>new Promise(c=>setTimeout(c,ms))
+const wait = ms => new Promise(c => setTimeout(c, ms));
+
+let filters={
+  onlyCompatible=
+}
+
+function loadPackageList() {
+  packageList.innerHTML="";
+  client.getDb().packages.forEach(e => {
+    packageList.appendChild(createPackageListItem(e));
+  });
+}
 
 async function refreshSources() {
   const loading = document.createElement("ion-loading");
@@ -116,9 +131,7 @@ async function refreshSources() {
       client.getDb().repos.forEach(e => {
         sourceList.appendChild(createSourceListItem(e));
       });
-      client.getDb().packages.forEach(e => {
-        sourceList.appendChild(createSourceListItem(e));
-      });
+      loadPackageList();
     })(),
     wait(1000)
   ]);
