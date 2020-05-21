@@ -81,6 +81,9 @@ function createSourceListItem(repo) {
 
 function createPackageListItem(pkg) {
   let ii = document.createElement("ion-item");
+  ii.addEventListener("click",()=>{
+    depict(pkg)
+  })
   let ia = document.createElement("ion-avatar");
   ia.slot = "start";
   let iai = document.createElement("img");
@@ -138,6 +141,42 @@ async function refreshSources() {
     wait(1000)
   ]);
   await loading.dismiss();
+  loading.remove();
+}
+
+customElements.define('depiction-page', class extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Modal Header</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button class="close">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <iframe></iframe>
+</ion-content>`;
+    const modalElement = document.querySelector('ion-modal');
+    const pkg=modalElement.componentProps;
+    this.querySelector("iframe").src=pkg.depiction
+  }
+});
+
+async function depict(pkg) {
+  // create the modal with the `modal-page` component
+  const modalElement = document.createElement('ion-modal');
+  modalElement.component = 'depiction-page';
+  modalElement.componentProps = pkg;
+
+  // present the modal
+  document.body.appendChild(modalElement);
+  modalElement.present();
+  await alert.onDidDismiss();
+  alert.remove();
 }
 
 refreshSources();

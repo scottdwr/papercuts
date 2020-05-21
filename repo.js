@@ -71,31 +71,3 @@ export async function init() {
   await Promise.all(sources.map(e => load(e)));
 }
 
-customElements.define('modal-page', class extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Modal Header</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button onClick="dismissModal()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
-  Modal Content
-</ion-content>`;
-  }
-});
-
-function presentModal() {
-  // create the modal with the `modal-page` component
-  const modalElement = document.createElement('ion-modal');
-  modalElement.component = 'modal-page';
-
-  // present the modal
-  document.body.appendChild(modalElement);
-  return modalElement.present();
-}
