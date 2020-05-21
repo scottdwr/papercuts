@@ -8,55 +8,59 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover"
     />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <!-- Color theme for statusbar (Android only) -->
-    <meta name="theme-color" content="#2196f3" />
     <!-- Your app title -->
     <title>Papercuts</title>
-    <!-- Path to Framework7 Library Bundle CSS -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/framework7@5.7.5/css/framework7.bundle.min.css"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
-    <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/framework7io/framework7-icons/css/framework7-icons.css"
   </head>
   <body>
-    <!-- App root element -->
-    <div id="app">
-      <div class="views tabs">
-        <!--
-        Tabbar for switching views-tabs. Should be a first child in Views.
-        Additional "toolbar-bottom" class to set it on bottom
-      -->
-        <div class="toolbar tabbar toolbar-bottom">
-          <div class="toolbar-inner">
-            <a href="#view-home" class="tab-link tab-link-active">
-              <i class="icon icon-home"></i>
-            </a>
-            <a href="#view-catalog" class="tab-link">
-              <i class="icon icon-catalog"></i>
-            </a>
-            <a href="#view-settings" class="tab-link">
-              <i class="icon icon-settings"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
-        <div id="view-home" class="view view-main tab tab-active">
-          ...
-        </div>
+    <ion-app>
+      <ion-tabs>
+        <ion-tab tab="home">
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Header</ion-title>
+            </ion-toolbar>
+          </ion-header>
 
-        <!-- Catalog View -->
-        <div id="view-catalog" class="view tab">
-          ...
-        </div>
+          <ion-content class="ion-padding">
+            <h1>Main Content</h1>
+          </ion-content>
+        </ion-tab>
+        <ion-tab tab="settings">
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Header</ion-title>
+            </ion-toolbar>
+          </ion-header>
 
-        <!-- Settings View -->
-        <div id="view-settings" class="view tab">
-          ...
-        </div>
-      </div>
-    </div>
+          <ion-content class="ion-padding">
+            <h1>Main Content</h1>
+          </ion-content>
+        </ion-tab>
+
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="home">
+            <ion-label>Home</ion-label>
+            <ion-icon name="home"></ion-icon>
+          </ion-tab-button>
+          <ion-tab-button tab="settings">
+            <ion-label>Settings</ion-label>
+            <ion-icon name="settings"></ion-icon>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-app>
     <!-- Path to your app js-->
     <script type="module" src="papercuts.js"></script>
   </body>
