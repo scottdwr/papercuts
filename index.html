@@ -27,33 +27,44 @@
       <div class="view view-main">
         <!-- Initial Page, "data-name" contains page name -->
         <div data-name="home" class="page">
-          <!-- Top Navbar -->
           <div class="navbar">
             <div class="navbar-bg"></div>
-            <div class="navbar-inner">
-              <div class="title">Papercuts</div>
+            <div class="navbar-inner sliding">
+              <div class="left">
+                <a href="#" class="link back">
+                  <i class="icon icon-back"></i>
+                  <span class="if-not-md">Back</span>
+                </a>
+              </div>
+              <div class="title">Static Tabs</div>
             </div>
           </div>
-
+          <div class="toolbar tabbar toolbar-bottom">
+            <div class="toolbar-inner">
+              <a href="#tab-1" class="tab-link tab-link-active">Tab 1</a>
+              <a href="#tab-2" class="tab-link">Tab 2</a>
+              <a href="#tab-3" class="tab-link">Tab 3</a>
+            </div>
+          </div>
           <div class="tabs">
-            <!-- First tab, should have "tab" class and unique id attribute -->
-            <!-- First tab is active by default - additional "tab-active" class -->
-            <div class="tab tab-active" id="tab1">
-              ... Tab 1 content goes here ...
+            <div id="tab-1" class="page-content tab tab-active">
+              <div class="block">
+                <p>Tab 1 content</p>
+                ...
+              </div>
             </div>
-            <!-- Second tab, should have "tab" class and unique id attribute -->
-            <div class="tab" id="tab2">
-              ... Tab 2 content goes here ...
+            <div id="tab-2" class="page-content tab">
+              <div class="block">
+                <p>Tab 2 content</p>
+                ...
+              </div>
             </div>
-            <!-- Third tab, should have "tab" class and unique id attribute -->
-            <div class="tab" id="tab3">
-              ... Tab 3 content goes here ...
+            <div id="tab-3" class="page-content tab">
+              <div class="block">
+                <p>Tab 3 content</p>
+                ...
+              </div>
             </div>
-          </div>
-
-          <!-- Scrollable page content -->
-          <div class="page-content">
-            <p>Page content goes here</p>
           </div>
         </div>
       </div>
