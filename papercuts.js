@@ -1,5 +1,6 @@
 import * as client from "./repo.js";
 window.onerror = error;
+
 async function error(e) {
   const alert = document.createElement("ion-alert");
   alert.header = "Error";
@@ -160,9 +161,8 @@ customElements.define(
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <div style="-webkit-overflow-scrolling:touch; width:100%;height:100%;overflow:auto;border:0;margin:0;"><iframe style="width:100%;height:100%;overflow:auto;border:0;margin:0;" scrolling="yes" frameborder="0"></iframe></div>
-</ion-content>`;
+<div style="-webkit-overflow-scrolling:touch; flex-grow:1;overflow:auto;border:0;margin:0;padding:0;display:flex;"><iframe style="flex-grow:1;overflow:auto;border:0;margin:0;" scrolling="yes" frameborder="0"></iframe></div>
+`;
       const modalElement = document.querySelector("ion-modal");
       const pkg = modalElement.componentProps;
       this.querySelector("iframe").src = pkg.depiction;
@@ -178,6 +178,18 @@ customElements.define(
   }
 );
 
+async function install(e) {
+  const alert = document.createElement("ion-alert");
+  alert.header = "Error";
+  alert.message = e;
+  alert.buttons = ["OK"];
+
+  document.body.appendChild(alert);
+  alert.present();
+  await alert.onDidDismiss();
+  alert.remove();
+}
+
 async function installUi(pkg){
   const loading = document.createElement("ion-loading");
   loading.message = "Finding dependencies...";
@@ -189,7 +201,7 @@ async function installUi(pkg){
   loading.remove();
   for(let i in toInstall){
     let u=toInstall[i];
-    prompt("Click OK to install item "+(i+1)+" of "+toInstall.length)
+    if(!confirm("Click OK to install item "+(i*1+1)+" of "+toInstall.length)) break;
     window.open(u)
   }
 }
