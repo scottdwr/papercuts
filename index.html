@@ -1,7 +1,7 @@
 <script>
   let db = {};
   db.repos = {};
-  db.packages = {};
+  db.packages = [];
   async function load(repo) {
     let meta = await (await fetch(repo + "/meta.json")).json();
     if (meta.id && meta.name && meta.version) {
@@ -13,27 +13,30 @@
         meta.icon + "" || "https://via.placeholder.com/57";
       let packages = await (await fetch(repo + "/packages.json")).json();
       for (let package of packages) {
-        db.packages[package.id + ""] = {};
-        db.packages[package.id + ""].id = package.id + "";
-        db.packages[package.id + ""].version = package.version + "";
-        db.packages[package.id + ""].name = package.name + "";
-        db.packages[package.id + ""].author = package.author || {
+        let dbpackage = {};
+        dbpackage.id = package.id + "";
+        dbpackage.version = package.version + "";
+        dbpackage.name = package.name + "";
+        dbpackage.link = package.link + "";
+        dbpackage.arch = package.arch + ""||"universal";
+        dbpackage.author = package.author || {
           name: "No Contact",
           link: "about:blank"
         };
-        db.packages[package.id + ""].maintainer =
-          package.maintainer || db.packages[package.id + ""].author;
-        db.packages[package.id + ""].description =
+        dbpackage.maintainer =
+          package.maintainer || dbpackage.author;
+        dbpackage.description =
           package.description + "" || "";
-        db.packages[package.id + ""].depends = package.depends || [];
-        db.packages[package.id + ""].depiction =
+        dbpackage.depends = package.depends || [];
+        dbpackage.depiction =
           package.depiction + "" || false;
 
-        if (!db.packages[package.id + ""].depiction) {
-          db.packages[package.id + ""].depiction =
+        if (!dbpackage.depiction) {
+          dbpackage.depiction =
             "https://papercuts.glitch.me/fallback-depiction.html#" +
-            encodeURIComponent(JSON.stringify(db.packages[package.id + ""]));
+            encodeURIComponent(JSON.stringify(dbpackage));
         }
+        db.packages.push(dbpackage)
       }
     }
   }
