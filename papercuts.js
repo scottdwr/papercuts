@@ -153,7 +153,7 @@ customElements.define(
   <ion-toolbar>
     <ion-title></ion-title>
     <ion-buttons slot="primary">
-      <ion-button fill="solid">  GET  </ion-button>
+      <ion-button shape="round" fill="solid" class="get"> &nbsp;&nbsp;GET&nbsp;&nbsp; </ion-button>
       <ion-button class="close">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
@@ -169,10 +169,18 @@ customElements.define(
       this.querySelector(".close").addEventListener("click", e =>
         modalElement.dismiss()
       );
+      this.querySelector(".get").addEventListener("click", e => {
+        modalElement.dismiss();
+        installUi(pkg);
+      });
       this.querySelector("ion-title").textContent = pkg.name;
     }
   }
 );
+
+async function installUi(pkg){
+  let toInstall=client.resolveDeps(pkg)
+}
 
 async function depict(pkg) {
   // create the modal with the `modal-page` component

@@ -49,6 +49,37 @@ async function load(repo, dryrun) {
 export function getDb() {
   return db;
 }
+export function getPackage(id){
+  function compare(a, b) {
+  // Use toUpperCase() to ignore character casing
+  const bandA = a.ver;
+  const bandB = b.band.toUpperCase();
+
+  let comp
+  return db.packages.filter(e => (e.id==id&&e.compatible))
+}
+// Embed-a-Engine 1.0
+function cmp (a, b) {
+let pa = a.split('.');
+let pb = b.split('.');
+for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+let na = Number(pa[i]);
+let nb = Number(pb[i]);
+if (isNaN(na)) na = 0;
+if (isNaN(nb)) nb = 0;
+if (na > nb) return -1;
+if (nb > na) return 1;
+}
+return 0;
+};
+export function resolveDeps(pkg){
+  let deps=new Set();
+  deps.add(pkg.id);
+  for(let dep of pkg.depends){
+    resolveDeps(getPackage(dep)).forEach(e=>deps.add(e));
+  }
+  return [...deps]
+}
 export async function addSource(url) {
   try {
     await load(url, true);
@@ -67,7 +98,7 @@ export async function init() {
   sources = [];
   db.repos = [];
   db.packages = [];
-  sources = JSON.parse(localStorage.getItem("sources") || "[]");
+  sources = JSON.parse(localStorage.getItem("sources") || "[\"https://papercuts-repo.glitch.me/\"]");
   await Promise.all(sources.map(e => load(e)));
 }
 
