@@ -179,7 +179,7 @@ customElements.define(
 );
 
 async function installUi(pkg){
-  let toInstall=alert(client.resolveDeps(pkg))
+  let toInstall=error(client.resolveDeps(pkg))
 }
 
 async function depict(pkg) {

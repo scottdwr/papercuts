@@ -72,14 +72,17 @@ function cmp(a, b) {
   }
   return 0;
 }
-export function resolveDeps(pkg) {
-  alert(pkg)
-  let deps = new Set();
+export function resolveDeps(pkg,deps,urls) {
+  deps = deps||new Set();
+  urls = urls||new Set();
   deps.add(pkg.id);
+  urls.add(pkg.link);
   for (let dep of pkg.depends) {
-    resolveDeps(getPackage(dep)).forEach(e => deps.add(e));
+    if(deps.has(dep)) continue;
+    let depp=getPackage(dep)
+    resolveDeps(depp,deps,urls)
   }
-  return [...deps];
+  return [...urls];
 }
 export async function addSource(url) {
   try {
