@@ -50,14 +50,8 @@ export function getDb() {
   return db;
 }
 export function getPackage(id){
-  function compare(a, b) {
-  // Use toUpperCase() to ignore character casing
-  const bandA = a.ver;
-  const bandB = b.band.toUpperCase();
-
-  let comp
-  return db.packages.filter(e => (e.id==id&&e.compatible))
-}
+  
+  
 // Embed-a-Engine 1.0
 function cmp (a, b) {
 let pa = a.split('.');
@@ -72,6 +66,7 @@ if (nb > na) return 1;
 }
 return 0;
 };
+  
 export function resolveDeps(pkg){
   let deps=new Set();
   deps.add(pkg.id);
