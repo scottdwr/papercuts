@@ -179,7 +179,14 @@ customElements.define(
 );
 
 async function installUi(pkg){
-  let toInstall=error(client.resolveDeps(pkg))
+  const loading = document.createElement("ion-loading");
+  loading.message = "Finding dependencies...";
+  document.body.appendChild(loading);
+  await loading.present()
+  let toInstall=(client.resolveDeps(pkg))
+  await wait(500)
+  await loading.dismiss();
+  loading.remove();
 }
 
 async function depict(pkg) {
