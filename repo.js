@@ -1,7 +1,8 @@
 let db = {};
+let sources=[];
 db.repos = {};
 db.packages = [];
-export async function load(repo) {
+async function load(repo) {
   let meta = await (await fetch(repo + "/meta.json")).json();
   if (meta.id && meta.name && meta.version) {
     db.repos[meta.id + ""] = {};
@@ -38,4 +39,13 @@ export async function load(repo) {
 }
 export function getDb() {
   return db;
+}
+export function addSource(url){
+  sources.push(url);
+  localStorage.setItem("sources",JSON.stringify(sources))
+  load(url)
+}
+export function init() {
+  sources=JSON.parse(localStorage.getItem("sources")||"[]");
+  sources.forEach(load)
 }
