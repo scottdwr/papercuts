@@ -157,12 +157,13 @@ customElements.define('depiction-page', class extends HTMLElement {
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <iframe></iframe>
+<ion-content>
+  <iframe style="width:100%;height:100%;overflow:auto;border:0:margin:none;" scrolling="yes" frameborder="0"></iframe>
 </ion-content>`;
     const modalElement = document.querySelector('ion-modal');
     const pkg=modalElement.componentProps;
     this.querySelector("iframe").src=pkg.depiction
+    this.querySelector(".close").addEventListener("click",modalElement.dismiss)
   }
 });
 
