@@ -16,7 +16,21 @@
         db.packages[package.id + ""] = {};
         db.packages[package.id + ""].id = package.id + "";
         db.packages[package.id + ""].version = package.version + "";
-        db.packages[package.id + ""].version = package.version + "";
+        db.packages[package.id + ""].name = package.name + "";
+        db.packages[package.id + ""].maintainer =
+          package.maintainer || package.author;
+        db.packages[package.id + ""].author =
+          package.author || {
+          
+        };
+        db.packages[package.id + ""].description =
+          package.description + "" || "";
+        db.packages[package.id + ""].depends = package.depends || [];
+        db.packages[package.id + ""].depiction = package.depiction+"" || false;
+        
+        if(!db.packages[package.id + ""].depiction){
+          db.packages[package.id + ""].depiction="https://papercuts.glitch.me/fallback-depiction.html#"+encodeURIComponent(JSON.stringify(db.packages[package.id + ""]))
+        }
       }
     }
   }
