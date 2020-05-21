@@ -1,5 +1,5 @@
 import * as client from "./repo.js";
-
+window.onerror=error;
 async function error(e) {
   const alert = document.createElement("ion-alert");
   alert.header = "Error";

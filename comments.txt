@@ -1,0 +1,28 @@
+catagories:
+All
+Books
+Buisness
+Development Tools
+Education
+Entertainment
+Finance
+Food and Drink
+Games
+Graphics & Design
+Health & Fitness
+Jailbreaking
+Kids
+Lifestyle
+Medical
+Music
+Navigation
+News
+Photo & Video
+Reference
+Shopping
+Snippets
+Social Networking
+Sports
+Travel
+Utilites
+Weather

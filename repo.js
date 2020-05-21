@@ -1,6 +1,6 @@
 let db = {};
 let sources = [];
-let arch = (navigator.userAgent.match(/iP\w+ OS ([\d_]+)/)||["",""])[1].split("_")[0];
+let arch = (navigator.userAgent.match(/iP.+? OS ([\d_]+)/)||["",""])[1].split("_")[0];
 arch=arch?"ios"+arch:"ios13";
 
 db.repos = [];
