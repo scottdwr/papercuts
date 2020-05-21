@@ -1,3 +1,5 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width">
 <h1 id="name"></h1>
 <h3 id="info"></h3>
 <p id="description"></p>
@@ -9,3 +11,27 @@
   ).textContent = `v${package.version} by ${package.author.name}`;
   document.querySelector("#description").textContent = package.description;
 </script>
+<style>
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #efeff4;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 200;
+}
+
+body>* {
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    background-color: white;
+    margin: 0.25rem 0;
+    border: 1px #c7c7c7;
+    border-style: solid none;
+    font-weight: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+</style>
