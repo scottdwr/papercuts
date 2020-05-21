@@ -187,6 +187,11 @@ async function installUi(pkg){
   await wait(500)
   await loading.dismiss();
   loading.remove();
+  for(let i in toInstall){
+    let u=toInstall[i];
+    prompt("Click OK to install item "+(i+1)+" of "+toInstall.length)
+    window.open(u)
+  }
 }
 
 async function depict(pkg) {
