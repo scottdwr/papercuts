@@ -84,29 +84,15 @@ function createPackageListItem(pkg) {
   let ia = document.createElement("ion-avatar");
   ia.slot = "start";
   let iai = document.createElement("img");
-  iai.src = repo.icon;
+  iai.src = pkg.icon;
   ia.appendChild(iai);
   ii.appendChild(ia);
   let il = document.createElement("ion-label");
   let ilh = document.createElement("h2");
-  ilh.textContent = repo.name;
+  ilh.textContent = pkg.name;
   il.appendChild(ilh);
-  let ilp = document.createElement("p");
-  ilp.textContent = repo.url;
-  il.appendChild(ilp);
   ii.appendChild(il);
-  iis.appendChild(ii);
-  let iios = document.createElement("ion-item-options");
-  iios.side = "start";
-  iis.appendChild(iios);
-  let iio = document.createElement("ion-item-option");
-  iio.color = "danger";
-  iio.textContent = "Remove";
-  iio.addEventListener("click", () => {
-    client.removeSource(repo.url);
-    refreshSources();
-  });
-  return iis;
+  return ii;
 }
 
 document.querySelector("#addSource").addEventListener("click", () => {
@@ -128,6 +114,9 @@ async function refreshSources() {
       await client.init();
       sourceList.innerHTML = "";
       client.getDb().repos.forEach(e => {
+        sourceList.appendChild(createSourceListItem(e));
+      });
+      client.getDb().packages.forEach(e => {
         sourceList.appendChild(createSourceListItem(e));
       });
     })(),
