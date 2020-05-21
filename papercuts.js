@@ -1,5 +1,5 @@
 import * as client from "./repo.js";
-window.onerror=error;
+window.onerror = error;
 async function error(e) {
   const alert = document.createElement("ion-alert");
   alert.header = "Error";
@@ -81,9 +81,9 @@ function createSourceListItem(repo) {
 
 function createPackageListItem(pkg) {
   let ii = document.createElement("ion-item");
-  ii.addEventListener("click",()=>{
-    depict(pkg)
-  })
+  ii.addEventListener("click", () => {
+    depict(pkg);
+  });
   let ia = document.createElement("ion-avatar");
   ia.slot = "start";
   let iai = document.createElement("img");
@@ -111,14 +111,14 @@ const packageList = document.querySelector("#packageList");
 
 const wait = ms => new Promise(c => setTimeout(c, ms));
 
-let filters={
-  onlyCompatible:true
-}
+let filters = {
+  onlyCompatible: true
+};
 
 function loadPackageList() {
-  packageList.innerHTML="";
-  let p=client.getDb().packages
-  if(filters.onlyCompatible) p=p.filter(e=>e.compatible)
+  packageList.innerHTML = "";
+  let p = client.getDb().packages;
+  if (filters.onlyCompatible) p = p.filter(e => e.compatible);
   p.forEach(e => {
     packageList.appendChild(createPackageListItem(e));
   });
@@ -144,13 +144,16 @@ async function refreshSources() {
   loading.remove();
 }
 
-customElements.define('depiction-page', class extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
+customElements.define(
+  "depiction-page",
+  class extends HTMLElement {
+    connectedCallback() {
+      this.innerHTML = `
 <ion-header>
   <ion-toolbar>
-    <ion-title>Modal Header</ion-title>
+    <ion-title></ion-title>
     <ion-buttons slot="primary">
+      <ion-button fill="solid">  GET  </ion-button>
       <ion-button class="close">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
@@ -158,19 +161,23 @@ customElements.define('depiction-page', class extends HTMLElement {
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <iframe style="width:100%;height:100%;overflow:auto;border:0:margin:none;" scrolling="yes" frameborder="0"></iframe>
+  <div style="-webkit-overflow-scrolling:touch; width:100%;height:100%;overflow:auto;border:0:margin:none;"><iframe style="width:100%;height:100%;overflow:auto;border:0:margin:none;" scrolling="yes" frameborder="0"></iframe></div>
 </ion-content>`;
-    const modalElement = document.querySelector('ion-modal');
-    const pkg=modalElement.componentProps;
-    this.querySelector("iframe").src=pkg.depiction
-    this.querySelector(".close").addEventListener("click",modalElement.dismiss)
+      const modalElement = document.querySelector("ion-modal");
+      const pkg = modalElement.componentProps;
+      this.querySelector("iframe").src = pkg.depiction;
+      this.querySelector(".close").addEventListener("click", e =>
+        modalElement.dismiss()
+      );
+      this.querySelector("ion-title").textContent = pkg.name;
+    }
   }
-});
+);
 
 async function depict(pkg) {
   // create the modal with the `modal-page` component
-  const modalElement = document.createElement('ion-modal');
-  modalElement.component = 'depiction-page';
+  const modalElement = document.createElement("ion-modal");
+  modalElement.component = "depiction-page";
   modalElement.componentProps = pkg;
 
   // present the modal
