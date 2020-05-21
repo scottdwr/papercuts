@@ -178,43 +178,60 @@ customElements.define(
   }
 );
 
-async function installStep(link,i,l) {
+async function installStep(link, i, l) {
   let installed;
   const alert = document.createElement("ion-alert");
   alert.header = "Installing dependencies";
-  alert.message = `Step ${i+1} of ${l}`;
-  alert.buttons = [{
+  alert.message = `Step ${i + 1} of ${l}`;
+  alert.buttons = [
+    {
       text: "Cancel",
       role: "cancel",
       cssClass: "secondary"
     },
     {
       text: "Install",
-      handler: async e => {
-        installed=true;
-        
-      }
-    }];
-
+      cssClass: "link"
+    }
+  ];
+  alert.style.display="none !important";
+  await alert.present();
+  await alert.dismiss();
+  debugger
+  alert.style.display="block";
+  let a = document.createElement("a");
+  let b = alert.querySelector(
+    ".link"
+  );
+  a.className = b.className;
+  a.href = "http://google.com";
+  a.target = "_blank";
+  a.innerHTML = b.innerHTML;
+  a.style.textDecoration = "none";
+  a.onclick=()=>{
+    installed=true;
+    alert.dismiss()
+  }
+  b.replaceWith(a);
   document.body.appendChild(alert);
   alert.present();
   await alert.onDidDismiss();
   alert.remove();
-  return !!installed
+  return !!installed;
 }
 
-async function installUi(pkg){
+async function installUi(pkg) {
   const loading = document.createElement("ion-loading");
   loading.message = "Finding dependencies...";
   document.body.appendChild(loading);
-  await loading.present()
-  let toInstall=(client.resolveDeps(pkg))
-  await wait(500)
+  await loading.present();
+  let toInstall = client.resolveDeps(pkg);
+  await wait(500);
   await loading.dismiss();
   loading.remove();
-  for(let i in toInstall){
-    let u=toInstall[i];
-    if(!await installStep(u,i*1,toInstall.length)) break;
+  for (let i in toInstall) {
+    let u = toInstall[i];
+    if (!(await installStep(u, i * 1, toInstall.length))) break;
   }
 }
 
@@ -227,8 +244,8 @@ async function depict(pkg) {
   // present the modal
   document.body.appendChild(modalElement);
   modalElement.present();
-  await alert.onDidDismiss();
-  alert.remove();
+  await modalElement.onDidDismiss();
+  modalElement.remove();
 }
 
 refreshSources();
