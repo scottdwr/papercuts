@@ -1,5 +1,5 @@
 let db = {};
-let sources=[];
+let sources = [];
 db.repos = {};
 db.packages = [];
 async function load(repo) {
@@ -40,12 +40,16 @@ async function load(repo) {
 export function getDb() {
   return db;
 }
-export function addSource(url){
-  sources.push(url);
-  localStorage.setItem("sources",JSON.stringify(sources))
-  load(url)
+export async function addSource(url) {
+  try {
+    await load(url);
+    sources.push(url);
+    localStorage.setItem("sources", JSON.stringify(sources));
+  } catch (e) {
+    throw new Error("Invalid Source!");
+  }
 }
 export async function init() {
-  sources=JSON.parse(localStorage.getItem("sources")||"[]");
-  sources.forEach(load)
+  sources = JSON.parse(localStorage.getItem("sources") || "[]");
+  await Promise.all(sources.map(load));
 }
