@@ -1,16 +1,18 @@
 let db = {};
 let sources = [];
-db.repos = {};
+db.repos = [];
 db.packages = [];
 async function load(repo) {
   let meta = await (await fetch(repo + "/meta.json")).json();
   if (meta.id && meta.name && meta.version) {
-    db.repos[meta.id + ""] = {};
-    db.repos[meta.id + ""].name = meta.name + "";
-    db.repos[meta.id + ""].version = meta.version + "";
-    db.repos[meta.id + ""].description = meta.description + "" || "";
-    db.repos[meta.id + ""].icon =
+    let dbrepo = {};
+    dbrepo.id = meta.id + "";
+    dbrepo.name = meta.name + "";
+    dbrepo.version = meta.version + "";
+    dbrepo.description = meta.description + "" || "";
+    dbrepo.icon =
       meta.icon + "" || "https://via.placeholder.com/57";
+    db.repos.push(dbrepo)
     let packages = await (await fetch(repo + "/packages.json")).json();
     for (let pakage of packages) {
       let dbpackage = {};
