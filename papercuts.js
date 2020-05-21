@@ -6,8 +6,8 @@ let app = new Framework7({
   // App Name
   name: "Papercuts",
   // App id
-  id: "me.glitch.papercuts"
+  id: "me.glitch.papercuts",
+  
+  theme:"ios"
 });
 window.app = app;
-let mainView = app.views.create(".view-main");
-window.mainView = mainView;

@@ -16,56 +16,44 @@
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/framework7@5.7.5/css/framework7.bundle.min.css"
-      integrity="sha256-E1ZpAtHqoLyfHb4hhlFONluok0pRurML3mxOo0hUJRw="
-      crossorigin="anonymous"
     />
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/framework7io/framework7-icons/css/framework7-icons.css"
   </head>
   <body>
     <!-- App root element -->
     <div id="app">
-      <!-- Your main view, should have "view-main" class -->
-      <div class="view view-main">
-        <!-- Initial Page, "data-name" contains page name -->
-        <div data-name="home" class="page">
-          <div class="navbar">
-            <div class="navbar-bg"></div>
-            <div class="navbar-inner sliding">
-              <div class="left">
-                <a href="#" class="link back">
-                  <i class="icon icon-back"></i>
-                  <span class="if-not-md">Back</span>
-                </a>
-              </div>
-              <div class="title">Static Tabs</div>
-            </div>
+      <div class="views tabs">
+        <!--
+        Tabbar for switching views-tabs. Should be a first child in Views.
+        Additional "toolbar-bottom" class to set it on bottom
+      -->
+        <div class="toolbar tabbar toolbar-bottom">
+          <div class="toolbar-inner">
+            <a href="#view-home" class="tab-link tab-link-active">
+              <i class="icon icon-home"></i>
+            </a>
+            <a href="#view-catalog" class="tab-link">
+              <i class="icon icon-catalog"></i>
+            </a>
+            <a href="#view-settings" class="tab-link">
+              <i class="icon icon-settings"></i>
+            </a>
           </div>
-          <div class="toolbar tabbar toolbar-bottom">
-            <div class="toolbar-inner">
-              <a href="#tab-1" class="tab-link tab-link-active">Tab 1</a>
-              <a href="#tab-2" class="tab-link">Tab 2</a>
-              <a href="#tab-3" class="tab-link">Tab 3</a>
-            </div>
-          </div>
-          <div class="tabs">
-            <div id="tab-1" class="page-content tab tab-active">
-              <div class="block">
-                <p>Tab 1 content</p>
-                ...
-              </div>
-            </div>
-            <div id="tab-2" class="page-content tab">
-              <div class="block">
-                <p>Tab 2 content</p>
-                ...
-              </div>
-            </div>
-            <div id="tab-3" class="page-content tab">
-              <div class="block">
-                <p>Tab 3 content</p>
-                ...
-              </div>
-            </div>
-          </div>
+        </div>
+        <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
+        <div id="view-home" class="view view-main tab tab-active">
+          ...
+        </div>
+
+        <!-- Catalog View -->
+        <div id="view-catalog" class="view tab">
+          ...
+        </div>
+
+        <!-- Settings View -->
+        <div id="view-settings" class="view tab">
+          ...
         </div>
       </div>
     </div>
