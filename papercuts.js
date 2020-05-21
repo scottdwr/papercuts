@@ -178,16 +178,29 @@ customElements.define(
   }
 );
 
-async function install(e) {
+async function installStep(link,i,l) {
+  let installed;
   const alert = document.createElement("ion-alert");
-  alert.header = "Error";
-  alert.message = e;
-  alert.buttons = ["OK"];
+  alert.header = "Installing dependencies";
+  alert.message = `Step ${i+1} of ${l}`;
+  alert.buttons = [{
+      text: "Cancel",
+      role: "cancel",
+      cssClass: "secondary"
+    },
+    {
+      text: "Install",
+      handler: async e => {
+        installed=true;
+        
+      }
+    }];
 
   document.body.appendChild(alert);
   alert.present();
   await alert.onDidDismiss();
   alert.remove();
+  return !!installed
 }
 
 async function installUi(pkg){
@@ -201,8 +214,7 @@ async function installUi(pkg){
   loading.remove();
   for(let i in toInstall){
     let u=toInstall[i];
-    if(!confirm("Click OK to install item "+(i*1+1)+" of "+toInstall.length)) break;
-    window.open(u)
+    if(!await installStep(u,i*1,toInstall.length)) break;
   }
 }
 
