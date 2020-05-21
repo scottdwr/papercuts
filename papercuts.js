@@ -109,12 +109,14 @@ const packageList = document.querySelector("#packageList");
 const wait = ms => new Promise(c => setTimeout(c, ms));
 
 let filters={
-  onlyCompatible=
+  onlyCompatible:true
 }
 
 function loadPackageList() {
   packageList.innerHTML="";
-  client.getDb().packages.forEach(e => {
+  let p=client.getDb().packages
+  if(filters.onlyCompatible) p=p.filter(e=>e.compatible)
+  p.forEach(e => {
     packageList.appendChild(createPackageListItem(e));
   });
 }
