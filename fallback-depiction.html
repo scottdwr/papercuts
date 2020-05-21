@@ -1,7 +1,9 @@
-<!doctype html>
-<meta name="viewport" content="width=device-width">
-<h1 id="name"></h1>
-<h3 id="info"></h3>
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width" />
+<header>
+  <h1 id="name"></h1>
+  <h3 id="info"></h3>
+</header>
 <p id="description"></p>
 <script>
   let package = JSON.parse(decodeURIComponent(location.hash.slice(1)));
@@ -19,19 +21,20 @@
     padding: 0;
     font-size: 17px;
     font-weight: 200;
-}
+  }
 
-body>* {
+  body > * {
     width: 100%;
     padding: 0.25rem 0.5rem;
     background-color: white;
     margin: 0.25rem 0;
     border: 1px #c7c7c7;
     border-style: solid none;
-    font-weight: normal;
-}
+  }
 
-* {
+  * {
     box-sizing: border-box;
-}
+    font-weight: normal;
+    margin:0;
+  }
 </style>
