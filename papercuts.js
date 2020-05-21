@@ -161,7 +161,7 @@ customElements.define(
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div style="-webkit-overflow-scrolling:touch; width:100%;height:100%;overflow:auto;border:0:margin:none;"><iframe style="width:100%;height:100%;overflow:auto;border:0:margin:none;" scrolling="yes" frameborder="0"></iframe></div>
+  <div style="-webkit-overflow-scrolling:touch; width:100%;height:100%;overflow:auto;border:0;margin:0;"><iframe style="width:100%;height:100%;overflow:auto;border:0;margin:0;" scrolling="yes" frameborder="0"></iframe></div>
 </ion-content>`;
       const modalElement = document.querySelector("ion-modal");
       const pkg = modalElement.componentProps;
