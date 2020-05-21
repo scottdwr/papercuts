@@ -1,9 +1,11 @@
-<h1 id="name">
-  
-</h1>
-<p id="description">
-  
-</p>
+<h1 id="name"></h1>
+<h3 id="info"></h3>
+<p id="description"></p>
 <script>
-  let package=JSON.parse(decodeURIComponent(location.hash.slice(1)));
+  let package = JSON.parse(decodeURIComponent(location.hash.slice(1)));
+  document.querySelector("#name").textContent = document.title = package.name;
+  document.querySelector(
+    "#info"
+  ).textContent = `v${package.version} by ${package.author.name}`;
+  document.querySelector("#description").textContent = package.description;
 </script>
