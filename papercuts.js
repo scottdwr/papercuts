@@ -2,9 +2,13 @@ import * as client from "./repo.js";
 window.onerror = error;
 
 async function error(e) {
+  await alert("Error", e)
+}
+
+async function alert(h,m) {
   const alert = document.createElement("ion-alert");
-  alert.header = "Error";
-  alert.message = e;
+  alert.header = h;
+  alert.message = m;
   alert.buttons = ["OK"];
 
   document.body.appendChild(alert);
@@ -181,8 +185,8 @@ customElements.define(
 async function installStep(link, i, l) {
   let installed;
   const alert = document.createElement("ion-alert");
-  alert.header = "Installing dependencies";
-  alert.message = `Step ${i + 1} of ${l}`;
+  alert.header = "Installing...";
+  alert.message = `Shortcut ${i + 1} of ${l}`;
   alert.buttons = [
     {
       text: "Cancel",
@@ -194,17 +198,14 @@ async function installStep(link, i, l) {
       cssClass: "link"
     }
   ];
-  alert.style.display="none !important";
+  document.body.appendChild(alert);
   await alert.present();
-  await alert.dismiss();
-  debugger
-  alert.style.display="block";
   let a = document.createElement("a");
   let b = alert.querySelector(
     ".link"
   );
   a.className = b.className;
-  a.href = "http://google.com";
+  a.href = link;
   a.target = "_blank";
   a.innerHTML = b.innerHTML;
   a.style.textDecoration = "none";
@@ -213,8 +214,6 @@ async function installStep(link, i, l) {
     alert.dismiss()
   }
   b.replaceWith(a);
-  document.body.appendChild(alert);
-  alert.present();
   await alert.onDidDismiss();
   alert.remove();
   return !!installed;
@@ -229,10 +228,15 @@ async function installUi(pkg) {
   await wait(500);
   await loading.dismiss();
   loading.remove();
+  let canceled;
   for (let i in toInstall) {
     let u = toInstall[i];
-    if (!(await installStep(u, i * 1, toInstall.length))) break;
+    if (!(await installStep(u, i * 1, toInstall.length))){
+      canceled=true
+      break
+    };
   }
+  if(!canceled) alert("Success!",`${pkg.name} and ${toInstall.length-1} dependenc${(toInstall.length-1==1)?"y was":"ies were"} installed successfully.`)
 }
 
 async function depict(pkg) {
