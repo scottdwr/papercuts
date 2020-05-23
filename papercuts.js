@@ -1,4 +1,7 @@
 import * as client from "./repo.js";
+import * as bplist from "./bplist.js";
+window.bplist=bplist;
+
 window.onerror = error;
 
 async function error(e) {
