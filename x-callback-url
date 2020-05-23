@@ -1,5 +1,0 @@
-<script>
-  let cu=new URL(new URLSearchParams(location.search).get("x-success"))
-  cu.searchParams.set("text",(localStorage.getItem("sources") || '["https://papercuts-repo.glitch.me/"]'))
-  location.href=cu.href;
-</script>
