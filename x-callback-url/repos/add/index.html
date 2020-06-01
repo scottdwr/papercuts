@@ -4,7 +4,7 @@
   let usp=new URLSearchParams(location.search);
   let cu=new URL(usp.get("x-success"))
   await client.init()
-  await addSource(usp.get("source"))
+  await client.addSource(usp.get("source"))
   location.href=cu.href;
   })();
 </script>
