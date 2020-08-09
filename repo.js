@@ -15,7 +15,7 @@ async function load(repo, dryrun) {
     dbrepo.url = repo;
     dbrepo.id = meta.id + "";
     dbrepo.name = meta.name + "";
-    dbrepo.version = meta.version + "";
+    dbrepo.version = meta.version + "" || "";
     dbrepo.description = meta.description + "" || "";
     dbrepo.icon = meta.icon + "" || "https://via.placeholder.com/57";
     if (!dryrun) {
