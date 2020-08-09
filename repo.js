@@ -34,7 +34,7 @@ async function load(repo, dryrun) {
           link: "about:blank"
         };
         dbpackage.compatible =
-          dbpackage.arch == arch || dbpackage.arch == "universal";
+          dbpackage.arch == "universal" || +dbpackage.arch.slice(3)<=+arch.slice(3);
         dbpackage.maintainer = pakage.maintainer || dbpackage.author;
         dbpackage.description = pakage.description + "" || "";
         dbpackage.depends = pakage.depends || [];
