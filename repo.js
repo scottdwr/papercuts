@@ -10,12 +10,12 @@ db.repos = [];
 db.packages = [];
 async function load(repo, dryrun) {
   let meta = await (await fetch(repo + "/meta.json")).json();
-  if (meta.id && meta.name && meta.version) {
+  if (meta.id && meta.name) {
     let dbrepo = {};
     dbrepo.url = repo;
     dbrepo.id = meta.id + "";
     dbrepo.name = meta.name + "";
-    dbrepo.version = meta.version + "" || "";
+    dbrepo.version = "1.0"; //TODO: is this needed?
     dbrepo.description = meta.description + "" || "";
     dbrepo.icon = meta.icon + "" || "https://via.placeholder.com/57";
     if (!dryrun) {
@@ -48,7 +48,7 @@ async function load(repo, dryrun) {
         db.packages.push(dbpackage);
       }
     }
-  }
+  } else throw new Error("Invalid repo!")
 }
 export function getDb() {
   return db;
