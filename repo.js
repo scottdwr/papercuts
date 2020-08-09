@@ -4,7 +4,7 @@ let arch = (navigator.userAgent.match(/iP.+? OS ([\d_]+)/) || [
   "",
   ""
 ])[1].split("_")[0];
-arch = arch ? "ios" + arch : "ios13";
+arch = arch ? "ios" + arch : "ios99999999999999999999";
 
 db.repos = [];
 db.packages = [];
@@ -28,7 +28,7 @@ async function load(repo, dryrun) {
         dbpackage.version = pakage.version + "";
         dbpackage.name = pakage.name + "";
         dbpackage.link = pakage.link + "";
-        dbpackage.arch = pakage.arch + "" || "universal";
+        dbpackage.arch = pakage.arch + "" || "ios12";
         dbpackage.author = pakage.author || {
           name: "No Contact",
           link: "about:blank"
