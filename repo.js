@@ -42,7 +42,7 @@ async function load(repo, dryrun) {
 
         if (!dbpackage.depiction) {
           dbpackage.depiction =
-            "https://easrng.github.io/papercuts/fallback-depiction.html#" +
+            "https://scottdwr.github.io/papercuts/fallback-depiction.html#" +
             encodeURIComponent(JSON.stringify(dbpackage));
         }
         db.packages.push(dbpackage);
@@ -103,7 +103,7 @@ export async function init() {
   db.repos = [];
   db.packages = [];
   sources = JSON.parse(
-    localStorage.getItem("sources") || '["https://easrng.github.io/papercuts-repo/"]'
+    localStorage.getItem("sources") || '["https://scottdwr.github.io/shortcuts-select/"]'
   );
   await Promise.all(sources.map(e => load(e)));
 }
